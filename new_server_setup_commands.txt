@@ -1,0 +1,56 @@
+ssh -i ~/.ssh/<private_key_file_name> root@<ip_of_the_server>
+
+apt update && apt upgrade -y
+
+
+apt install -y ufw curl wget unzip git maven
+
+========= docker installation============
+sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io
+
+sudo docker --version
+
+
+sudo usermod -aG docker $USER
+
+newgrp docker
+==============================
+
+
+ufw allow OpenSSH
+ufw allow 80
+ufw allow 443
+ufw enable
+
+
+apt install -y openjdk-21-jdk
+java -version
+
+apt install -y nginx
+systemctl enable nginx
+systemctl start nginx
+
+After this add the ip to DNS record
+Host: api     -> this will resolve to api.pageforge.xyz. so just give "api" 				in host field in namecheap console 
+Value: <your-server-ip>
+TTL: Automatic
+
+apt install -y certbot python3-certbot-nginx
+
+certbot --nginx -d api.pageforge.xyz
+
+use git clone to clone the repos (use PAT for gh password)
+
+use mvn to build the jars (by cd ing into each repo dir and mvn...)
+
+
+// to copy a file to vps
+scp -i ~/.ssh/<private_key_file> /path/to/local/file root@<ip_of_the_server>:/path/on/server

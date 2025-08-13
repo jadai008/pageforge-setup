@@ -1,7 +1,7 @@
 # This file should go to the location /etc/nginx/sites-available/api.pageforge.xyz
 
 # Define the upstream (load balanced) groups for each service
-upstream puzzles_service {
+upstream wordsearch_puzzles_service {
     least_conn;
     server localhost:9000;
     # server localhost:9001;
@@ -30,8 +30,8 @@ server {
     server_name api.pageforge.xyz;
 
     # --- Puzzles Service ---
-    location /api/v1/puzzles/ {
-        proxy_pass http://puzzles_service;
+    location /api/v1/puzzles/wsearch {
+        proxy_pass http://wordsearch_puzzles_service;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;

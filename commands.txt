@@ -1,0 +1,11 @@
+To pass an external config file (spring will respect --property passed via CLI)
+
+java -jar myapp.jar \
+  --spring.config.location=/path/to/custom.yaml \
+  --spring.profiles.active=prod \
+  --server.port=9091
+
+To pass multiple external config files
+java -jar myapp.jar \
+  --spring.config.location=/etc/myapp/base.yaml,/etc/myapp/overrides.yaml \
+  --server.port=9092

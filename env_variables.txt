@@ -1,0 +1,5 @@
+R2DBC_POSTGRES_URL - postgres url in r2dbc format
+JDBC_POSTGRES_URL - postgres url in jdbc format
+POSTGRES_USER - postgres username
+POSTGRES_PASSWORD - password for postgres
+CREDIT_TOKEN_SVC_API_KEY - Credit token service API key. Should be available in the db
